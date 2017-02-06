@@ -5,6 +5,8 @@ using UnityEngine;
 public class FloatScript : MonoBehaviour {
 
 	public float floatStrength;
+	public float counterForceTop;
+	public float counterForceBottom;
 
 	public float topOfScreen;
 	public float bottomOfScreen;
@@ -16,14 +18,13 @@ public class FloatScript : MonoBehaviour {
 		
 	}
 
-
-	void Update () {
+	void FixedUpdate () {
 
 
 		if (transform.position.y >= topOfScreen) {
-			rb.AddForce (Vector3.up * floatStrength * 0.6f);
+			rb.AddForce (Vector3.up * floatStrength * counterForceTop);
 		} else if (transform.position.y <= bottomOfScreen) {
-			rb.AddForce (Vector3.up * floatStrength * 1.4f);
+			rb.AddForce (Vector3.up * floatStrength * counterForceBottom);
 		} else {
 			rb.AddForce(Vector3.up * floatStrength);
 		}
