@@ -10,7 +10,9 @@ public class Manager : MonoBehaviour {
 
 	[SerializeField] TextMesh foodUI;
 	[SerializeField] TextMesh scoreUI;
+	[SerializeField] TextMesh wasteUI;
 
+	//team stats
 	int[] score;
 
 	//for spawning food
@@ -19,6 +21,7 @@ public class Manager : MonoBehaviour {
 
 	//robo stats
 	int[] foodCount; //food count of each team
+	int wasteLevel;
 
 
 	// Use this for initialization
@@ -27,6 +30,7 @@ public class Manager : MonoBehaviour {
 		score = new int[2]; //2 teams
 		hasFood = new bool[2]; //2 teams
 		foodCount = new int[2];
+		wasteLevel = 0;
 		for (int i=0; i<2; i++){
 			score[i]=0;
 			foodCount [i] = 0;
@@ -79,5 +83,19 @@ public class Manager : MonoBehaviour {
 
 	public int getFood(int team){
 		return foodCount [team];
+	}
+
+	public int getWasteLevel(){
+		return wasteLevel;
+	}
+
+	public void incrementWaste(){
+		wasteLevel++;
+		wasteUI.text = "waste level: " + wasteLevel;
+	}
+
+	public void clearWaste(){
+		wasteLevel = 0;
+		wasteUI.text = "waste level: " + wasteLevel;
 	}
 }

@@ -23,11 +23,13 @@ public class HeadScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float AngleRad = Mathf.Atan2(Input.mousePosition.y - transform.position.y, Input.mousePosition.x - transform.position.x);
+		Vector3 rawMouse = Input.mousePosition;
+		rawMouse.z = 10.0f;
+		Vector3 mouseStuff = Camera.main.ScreenToWorldPoint (rawMouse);
+		float AngleRad = Mathf.Atan2(1, mouseStuff.x - transform.position.x);
+		Debug.Log (mouseStuff.x + ", " + transform.position.x);
 		float AngleDeg = AngleRad * Mathf.Rad2Deg;
-//		this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
-		//WHY WON'T THIS ROTATION WORK CORRECTLY
-		//extra note: i did not try super hard to get it to work correctly. i will ask around later
+		this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg-90);
 
 		if (Input.GetMouseButtonDown (0)) {
 			openMouth ();
@@ -48,13 +50,15 @@ public class HeadScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 //		Debug.Log ("hit");
-		int team=0;
-		if (col.gameObject.tag == "Team1")
-			team = 0;
-		else if (col.gameObject.tag == "Team2")
-			team = 1;
-		manager.GetComponent<Manager> ().increaseFood (team,1); //increase food of the team
-		manager.GetComponent<Manager> ().increaseScore (team,2); //increase score of the team by 2
-		Destroy (col.gameObject);
+		if (col.gameObject.tag == "Respawn") {
+			int team = 0;
+			if (col.gameObject.tag == "Team1")
+				team = 0;
+			else if (col.gameObject.tag == "Team2")
+				team = 1;
+			manager.GetComponent<Manager> ().increaseFood (team, 1); //increase food of the team
+			manager.GetComponent<Manager> ().increaseScore (team, 2); //increase score of the team by 2
+			Destroy (col.gameObject);
+		}
 	}
 }

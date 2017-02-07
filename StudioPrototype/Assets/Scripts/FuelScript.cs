@@ -60,5 +60,6 @@ public class FuelScript : MonoBehaviour {
 
 	public void FuelLoss(){
 		fuel--;
+		managerScript.incrementWaste ();
 	}
 }
