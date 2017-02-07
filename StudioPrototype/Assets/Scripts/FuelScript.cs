@@ -9,18 +9,20 @@ public class FuelScript : MonoBehaviour {
 	GameObject torso;
 	FloatScript floatingRobot;
 
-	// Use this for initialization
 	void Start () {
+
+		// Deplete fuel ever second
 		InvokeRepeating ("FuelLoss", 1f, 1f);
 		torso = GameObject.Find ("RoboTorso");
 		floatingRobot = torso.GetComponent<FloatScript> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
+		
 //		Debug.Log ("Fuel: " + fuel);
 //		Debug.Log ("Fuel Strength: " + floatingRobot.floatStrength);
 
+		// Display Fuel Text
 		if (fuel >= 0) {
 			fuelText.text = "Fuel: " + fuel.ToString ();
 		} else {

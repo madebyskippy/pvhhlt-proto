@@ -9,8 +9,9 @@ public class ArmScript: MonoBehaviour {
 	public KeyCode topPartInput;
 	public KeyCode bottomPartInput;
 
-	public GameObject ArmTop;
-	public GameObject ArmBottom;
+	[SerializeField]
+	GameObject ArmTop;
+	GameObject ArmBottom;
 
 	Rigidbody2D rbTop;
 	Rigidbody2D rbBottom;
@@ -44,19 +45,7 @@ public class ArmScript: MonoBehaviour {
 //			rb.freezeRotation = false;
 //		}
 	}
-
-//	public void OnTriggerEnter2D(Collider2D collider)
-//	{
-//
-//		if (collider.tag == ) {
-//		}
-//	}
-//	public void OnTriggerExit2D(Collider2D collider)
-//	{
-//
-//		if (collider.tag == ) {
-//		}
-//	}
+		
 
 	void MoveArms(int dir){
 		if (Input.GetKey(topPartInput)){
