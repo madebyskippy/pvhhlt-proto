@@ -51,11 +51,7 @@ public class HeadScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 //		Debug.Log ("hit");
 		if (col.gameObject.tag == "Respawn") {
-			int team = 0;
-			if (col.gameObject.tag == "Team1")
-				team = 0;
-			else if (col.gameObject.tag == "Team2")
-				team = 1;
+			int team = col.gameObject.GetComponent<FoodScript> ().team;
 			manager.GetComponent<Manager> ().increaseFood (team, 1); //increase food of the team
 			manager.GetComponent<Manager> ().increaseScore (team, 2); //increase score of the team by 2
 			Destroy (col.gameObject);
