@@ -19,7 +19,7 @@ public class FuelScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 //		Debug.Log ("Fuel: " + fuel);
-		Debug.Log ("Fuel Strength: " + floatingRobot.floatStrength);
+//		Debug.Log ("Fuel Strength: " + floatingRobot.floatStrength);
 
 		if (fuel >= 0) {
 			fuelText.text = "Fuel: " + fuel.ToString ();

@@ -23,11 +23,12 @@ public class MovementScript : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKey (moveRight)) {
-			torso.AddForce (Vector3.right * speed * Time.deltaTime);		
-		}
+			torso.AddForce (Vector3.right * speed);	
+		}			
 
 		if (Input.GetKey (moveLeft)) {
-			torso.AddForce (Vector3.left * speed * Time.deltaTime);		
+			torso.AddForce (Vector3.left * speed);	
+
 		}
 	}
 
