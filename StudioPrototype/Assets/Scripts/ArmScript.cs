@@ -11,6 +11,7 @@ public class ArmScript: MonoBehaviour {
 
 	[SerializeField]
 	GameObject ArmTop;
+	[SerializeField]
 	GameObject ArmBottom;
 
 	Rigidbody2D rbTop;

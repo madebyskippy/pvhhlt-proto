@@ -9,8 +9,7 @@ public class FoodScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		setTeam (team);
-//		Invoke ("killSelf", 5f);
-		//wanted it to kill itself so it could respawn but this is working really weird
+		Invoke ("killSelf", 5f);
 	}
 	
 	// Update is called once per frame
@@ -28,6 +27,6 @@ public class FoodScript : MonoBehaviour {
 	}
 		
 	void killSelf(){
-		Destroy (this);
+		Destroy (gameObject);
 	}
 }

@@ -8,18 +8,28 @@ public class Manager : MonoBehaviour {
 	[SerializeField] GameObject robotRHand;
 	[SerializeField] GameObject robotLHand;
 
+	[SerializeField] TextMesh foodUI;
+	[SerializeField] TextMesh scoreUI;
+
 	int[] score;
 
 	//for spawning food
 	float spawnChance = 0.01f; //chance it'll spawn on a frame
 	bool[] hasFood;
 
+	//robo stats
+	int[] foodCount; //food count of each team
+
+
 	// Use this for initialization
 	void Start () {
+		//initialize and zero everything. empty robot
 		score = new int[2]; //2 teams
 		hasFood = new bool[2]; //2 teams
+		foodCount = new int[2];
 		for (int i=0; i<2; i++){
 			score[i]=0;
+			foodCount [i] = 0;
 			hasFood[i]=false;
 		}
 	}
@@ -27,14 +37,14 @@ public class Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//check if food in hands
-//		if (robotRHand.transform.childCount > 0)
-//			hasFood [0] = true;
-//		else
-//			hasFood [0] = false;
-//		if (robotLHand.transform.childCount > 0)
-//			hasFood [1] = true;
-//		else
-//			hasFood [1] = false;
+		if (robotRHand.transform.childCount > 0)
+			hasFood [0] = true;
+		else
+			hasFood [0] = false;
+		if (robotLHand.transform.childCount > 0)
+			hasFood [1] = true;
+		else
+			hasFood [1] = false;
 		
 
 		//spawn food stuff
@@ -55,5 +65,19 @@ public class Manager : MonoBehaviour {
 				food.GetComponent<FoodScript> ().setTeam (Random.Range (0, 2));
 			}
 		}
+	}
+
+	public void increaseFood(int team, int val){
+		foodCount [team] += val;
+		foodUI.text = "food count\nteam 1: " + foodCount [0] + "\nteam 2: " + foodCount [1];
+	}
+
+	public void increaseScore(int team, int val){
+		score [team] += val;
+		scoreUI.text = "score\nteam 1: " + score [0] + "\nteam 2: " + score [1];
+	}
+
+	public int getFood(int team){
+		return foodCount [team];
 	}
 }

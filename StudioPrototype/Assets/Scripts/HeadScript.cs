@@ -8,6 +8,8 @@ public class HeadScript : MonoBehaviour {
 	[SerializeField] Sprite mouthOpen;
 	[SerializeField] Sprite mouthClosed;
 
+	[SerializeField] GameObject manager;
+
 	SpriteRenderer sr;
 	Collider2D col;
 
@@ -15,7 +17,8 @@ public class HeadScript : MonoBehaviour {
 	void Start () {
 		sr = GetComponent<SpriteRenderer> ();
 		col = GetComponent<Collider2D> ();
-		col.enabled = false;
+		openMouth ();
+		//closeMouth();
 	}
 	
 	// Update is called once per frame
@@ -27,21 +30,31 @@ public class HeadScript : MonoBehaviour {
 		//extra note: i did not try super hard to get it to work correctly. i will ask around later
 
 		if (Input.GetMouseButtonDown (0)) {
-			sr.sprite = mouthOpen;
-			col.enabled = true;
+			openMouth ();
 		}
 		if (Input.GetMouseButtonUp (0)) {
-			sr.sprite = mouthClosed;
-			col.enabled = false;
+			closeMouth ();
 		}
 	}
 
+	void openMouth(){
+		sr.sprite = mouthOpen;
+		col.enabled = true;
+	}
+	void closeMouth(){
+		sr.sprite = mouthClosed;
+		col.enabled = false;
+	}
+
 	void OnTriggerEnter2D(Collider2D col){
-		Debug.Log ("hit");
-		int team;
+//		Debug.Log ("hit");
+		int team=0;
 		if (col.gameObject.tag == "Team1")
 			team = 0;
 		else if (col.gameObject.tag == "Team2")
 			team = 1;
+		manager.GetComponent<Manager> ().increaseFood (team,1); //increase food of the team
+		manager.GetComponent<Manager> ().increaseScore (team,2); //increase score of the team by 2
+		Destroy (col.gameObject);
 	}
 }
