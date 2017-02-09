@@ -10,6 +10,7 @@ public class HeadScript : MonoBehaviour {
 
 	[SerializeField] GameObject manager;
 
+
 	SpriteRenderer sr;
 	Collider2D col;
 
@@ -27,7 +28,7 @@ public class HeadScript : MonoBehaviour {
 		rawMouse.z = 10.0f;
 		Vector3 mouseStuff = Camera.main.ScreenToWorldPoint (rawMouse);
 		float AngleRad = Mathf.Atan2(1, mouseStuff.x - transform.position.x);
-		Debug.Log (mouseStuff.x + ", " + transform.position.x);
+//		Debug.Log (mouseStuff.x + ", " + transform.position.x);
 		float AngleDeg = AngleRad * Mathf.Rad2Deg;
 		this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg-90);
 

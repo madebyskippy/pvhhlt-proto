@@ -5,6 +5,7 @@ using UnityEngine;
 public class Manager : MonoBehaviour {
 	//this script will keep track of score, and also spawn food, etc
 	public GameObject foodPrefab;
+	[SerializeField] GameObject belly;
 	[SerializeField] GameObject robotRHand;
 	[SerializeField] GameObject robotLHand;
 
@@ -73,6 +74,7 @@ public class Manager : MonoBehaviour {
 
 	public void increaseFood(int team, int val){
 		foodCount [team] += val;
+		belly.GetComponent<BellyScript>().MakeFoodinBelly(team); //Spawn a food in the belly
 		foodUI.text = "food count\nteam 1: " + foodCount [0] + "\nteam 2: " + foodCount [1];
 	}
 
