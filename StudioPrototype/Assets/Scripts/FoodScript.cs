@@ -8,8 +8,10 @@ public class FoodScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		setTeam (team);
-		Invoke ("killSelf", 5f);
+		if (gameObject.tag == "Respawn") {
+			setTeam (team);
+			Invoke ("killSelf", 5f);
+		}
 	}
 	
 	// Update is called once per frame

@@ -96,6 +96,11 @@ public class Manager : MonoBehaviour {
 		wasteUI.text = "waste level: " + wasteLevel;
 	}
 
+	public void decrementWaste(){
+		wasteLevel--;
+		wasteUI.text = "waste level: " + wasteLevel;
+	}
+
 	public void clearWaste(){
 		wasteLevel = 0;
 		wasteUI.text = "waste level: " + wasteLevel;

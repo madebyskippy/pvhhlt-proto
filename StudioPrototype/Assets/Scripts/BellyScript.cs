@@ -7,6 +7,7 @@ public class BellyScript : MonoBehaviour {
 	public GameObject foodinBelly;
 
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,14 +25,13 @@ public class BellyScript : MonoBehaviour {
 		Vector3 spawnPos = new Vector3 (transform.position.x,transform.position.y - 1f,0f);
 
 //		Debug.Log ("Food Eaten");
-		if (team == 0) {
-			foodinBelly.GetComponent<SpriteRenderer> ().color = Color.red;
-		} else if (team == 1) {
-			foodinBelly.GetComponent<SpriteRenderer> ().color = Color.blue;
-		}
-
+		foodinBelly.GetComponent<FoodScript> ().setTeam (team);
 		Instantiate (foodinBelly, spawnPos, Quaternion.identity) ;
+
+
 	}
+
+
 
 
 
