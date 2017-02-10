@@ -37,6 +37,7 @@ public class MovementScript : MonoBehaviour {
 
 		if (Input.GetKeyDown (squat)) {
 			GetComponent<SpriteRenderer> ().color = Color.gray;
+	
 			if (currentToilet > -1 && managerScript.getWasteLevel()>0) {
 				//you're squatting and on a toilet and have stuff in your system, poop
 				managerScript.clearWaste();
@@ -45,6 +46,8 @@ public class MovementScript : MonoBehaviour {
 			}
 		}if (Input.GetKeyUp (squat)) {
 			GetComponent<SpriteRenderer> ().color = Color.white;
+
+
 		}
 	}
 

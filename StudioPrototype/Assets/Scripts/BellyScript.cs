@@ -19,8 +19,11 @@ public class BellyScript : MonoBehaviour {
 	}
 
 	public void MakeFoodinBelly(int team){
+		// Gets info about food eaten and creates digestable food in belly
+
 		Vector3 spawnPos = new Vector3 (transform.position.x,transform.position.y - 1f,0f);
-		Debug.Log ("Food Eaten");
+
+//		Debug.Log ("Food Eaten");
 		if (team == 0) {
 			foodinBelly.GetComponent<SpriteRenderer> ().color = Color.red;
 		} else if (team == 1) {
