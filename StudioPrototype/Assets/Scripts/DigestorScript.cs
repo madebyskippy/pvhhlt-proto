@@ -16,7 +16,7 @@ public class DigestorScript : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		sr = GetComponent<SpriteRenderer> ();
-		sr.color = Color.gray;
+		sr.color = Color.black;
 	}
 	
 	// Update is called once per frame
@@ -28,13 +28,13 @@ public class DigestorScript : MonoBehaviour {
 				sr.color = Color.white;
 				col.enabled = true;
 			} else {
-				sr.color = Color.gray;
+				sr.color = Color.black;
 				col.enabled = false;
 			}
 
 		}
 		else{
-			sr.color = Color.gray;
+			sr.color = Color.black;
 			col.enabled = false;
 		}
 
