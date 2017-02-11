@@ -7,6 +7,8 @@ public class DigestorScript : MonoBehaviour {
 	[SerializeField] GameObject prefab;
 	[SerializeField] GameObject manager;
 
+	[SerializeField] Color color1;
+
 	public KeyCode digest;
 	public Collider2D col;
 
@@ -25,7 +27,7 @@ public class DigestorScript : MonoBehaviour {
 			//Digestor only works when Waste level is greater than zero, depletes waste level when pressed
 			if (manager.GetComponent<Manager> ().getWasteLevel () > 0) {				
 				manager.GetComponent<Manager> ().decrementWaste (); // Reduce waste level 
-				sr.color = Color.white;
+				sr.color = color1;
 				col.enabled = true;
 			} else {
 				sr.color = Color.black;
