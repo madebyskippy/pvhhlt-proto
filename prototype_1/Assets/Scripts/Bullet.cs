@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
 	void Start () {
 		bang = GetComponent<AudioSource> ();
 		bang.Play ();
+		Destroy (gameObject, 5f);
 	}
 	
 	// Update is called once per frame

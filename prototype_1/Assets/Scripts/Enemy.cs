@@ -4,13 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour {
+	
 
-	GameObject enemyCtrl;
-	GameObject enemyMgr;
-	SpriteRenderer enemySprite;
-	GameObject deathEffect;
-	ParticleSystem deathParticles;
-
+	GameObject head;
 	public GameObject enemyManager;
 	public float speed;
 	// Use this for initialization
@@ -18,15 +14,11 @@ public class Enemy : MonoBehaviour {
 	bool isGrounded;
 
 	void Start () {
-		enemySprite = GetComponent<SpriteRenderer> ();
-		deathEffect = GameObject.Find("DeathEffect");
-		deathParticles = deathEffect.GetComponent<ParticleSystem> ();
+		head = GameObject.Find ("Head");
 
 		isGrounded = false;
-		enemyCtrl = GameObject.Find ("EnemyManager");
+		//enemyCtrl = GameObject.Find ("EnemyManager");
 		rb = GetComponent<Rigidbody2D> ();
-		deathEffect.SetActive (true);
-
 	}
 	
 	// Update is called once per frame
@@ -35,32 +27,6 @@ public class Enemy : MonoBehaviour {
 		if (isGrounded) {
 			transform.Translate (Vector2.right * speed * Time.deltaTime);
 		}
-		//if enemy landed on right, move to the left.
-//		if (enemyCtrl.GetComponent<EnemyController>().ifLeft == false && isGrounded) {
-//			//rb.AddForce (Vector2.left * speed * Time.deltaTime);
-//			transform.Translate (Vector2.left * speed * Time.deltaTime);
-//			Debug.Log ("landed on right");
-//		}
-//		//if enemy landed on the left, move to the right.
-//		if (enemyCtrl.GetComponent<EnemyController>().ifLeft == true && isGrounded) {
-//			//rb.AddForce (Vector2.right * speed * Time.deltaTime);
-//			transform.Translate (Vector2.right * speed * Time.deltaTime);
-//			Debug.Log ("landed on left");
-//
-//		}
-//		//if enemy landed mid, randomly move left or right.
-//		if (enemyCtrl.GetComponent<EnemyController>().ifMid == true && isGrounded) {
-//			float prob;
-//			prob = Random.Range (0f, 1f);
-//			if (prob >= 0.51f) {			
-//				transform.Translate (Vector2.right * speed * Time.deltaTime);
-//				//rb.AddForce (Vector2.right * speed * Time.deltaTime); 
-//			} else {
-//				transform.Translate (Vector2.left * speed * Time.deltaTime);
-//				//rb.AddForce (Vector2.left * speed * Time.deltaTime);
-//			}
-//			Debug.Log ("landed mid");
-//		}
 
 	}
 
@@ -73,8 +39,9 @@ public class Enemy : MonoBehaviour {
 
 		if (coll.gameObject.tag == "Bullet") {
 			//GameObject.Find("EnemyManager").SendMessage("SpawnEnemy");
+			head.SendMessage ("ExpIncrease");
 			Destroy (coll.gameObject);
-			BulletEffect ();
+			Destroy (gameObject);
 			//Destroy (gameObject);
 		}
 
@@ -97,16 +64,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	void BulletEffect()
-	{
-		enemySprite.enabled = false;
-		deathParticles.Play ();
-		Invoke ("DelayedDeath", 5f);	
-	}
 
-	void DelayedDeath()
-	{
-		Destroy(gameObject);
-	}
+		
 }
 
