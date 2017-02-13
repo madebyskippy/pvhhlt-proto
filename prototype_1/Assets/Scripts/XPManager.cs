@@ -21,10 +21,13 @@ public class XPManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		expImage.fillAmount = exp;
+
 		if (exp >= EXP_MAX) {
 			OnLevelUp.Invoke ();
 		}
+
+		expImage.fillAmount = exp;
+
 		//expText.text = exp.ToString ("###"); 
 	}
 
