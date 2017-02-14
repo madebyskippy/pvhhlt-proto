@@ -34,9 +34,10 @@ public class Enemy : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll){
 		if (coll.gameObject.tag == "Foot" || coll.gameObject.tag == "Head") {
-//			Destroy (coll.gameObject);	
-			//SceneManager.LoadScene("game");
-			//Application.LoadLevel (0);
+			if (!GameObject.Find ("Head").GetComponent<Head> ().combined) {
+				Destroy (coll.gameObject);	
+				SceneManager.LoadScene ("game");
+			} 
 		}
 
 		if (coll.gameObject.tag == "Bullet") {

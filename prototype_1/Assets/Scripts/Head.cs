@@ -23,8 +23,12 @@ public class Head : MonoBehaviour {
 	AudioSource jumpSound;
 	GameObject[] enemies;
 	GameObject enemy;
+	GameObject breakSoundHolder;
+	AudioSource breakSound;
 
 	void Start () {
+		breakSoundHolder = GameObject.Find ("BreakSoundHolder");
+		breakSound = breakSoundHolder.GetComponent<AudioSource> ();
 		jumpSound = GetComponent<AudioSource> ();
 		bang = GameObject.Find ("BulletSoundHolder"); 
 		bangSound = bang.GetComponent<AudioSource> ();
@@ -98,6 +102,7 @@ public class Head : MonoBehaviour {
 					bc.enabled = false;
 					rb.Sleep ();
 					child.Play ();
+					GameObject.Find ("CombineEffect").SendMessage ("PlaySound");
 				}
 			}
 		} else {
@@ -119,10 +124,10 @@ public class Head : MonoBehaviour {
 					bc.enabled = true;
 					rb.WakeUp ();
 					foot.GetComponent<Foot> ().SendMessage ("UnsetCombined");
+					breakSound.Play ();	
 				} else {
 					FireBullet ();
 					bangSound.Play ();
-
 				}
 			} 
 
