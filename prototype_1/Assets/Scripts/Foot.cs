@@ -14,14 +14,18 @@ public class Foot : MonoBehaviour {
 	private float JumpTime = 0f;
 	private bool CanJump;
 	private bool combined;
+	AudioSource jumpSound;
+ 	bool isGrounded;
+ 
 
 	void Start () {
+		jumpSound = GetComponent<AudioSource> ();
 		animator = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
 		bc = GetComponent<BoxCollider2D> ();
 		JumpTime  = MaxJumpTime;
 		combined = false;
-	}
+ 	}
 
 
 	void Update ()
@@ -70,7 +74,8 @@ public class Foot : MonoBehaviour {
 			rb.AddForce(Vector2.up * JumpForce);
 			CanJump = false;
 			JumpTime  = MaxJumpTime;
-		}
+			jumpSound.Play ();
+ 		}
 	}
 
 	public void SetCombined() {
@@ -80,4 +85,5 @@ public class Foot : MonoBehaviour {
 	public void UnsetCombined() {
 		combined = false;
 	}
+
 }

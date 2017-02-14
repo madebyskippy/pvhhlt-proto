@@ -20,9 +20,12 @@ public class Head : MonoBehaviour {
 	public ParticleSystem child;
 	GameObject bang;
 	AudioSource bangSound;
-
+	AudioSource jumpSound;
+	GameObject[] enemies;
+	GameObject enemy;
 
 	void Start () {
+		jumpSound = GetComponent<AudioSource> ();
 		bang = GameObject.Find ("BulletSoundHolder"); 
 		bangSound = bang.GetComponent<AudioSource> ();
 		animator = GetComponent<Animator> ();
@@ -85,6 +88,7 @@ public class Head : MonoBehaviour {
 				rb.AddForce (Vector2.up * JumpForce);
 				CanJump = false;
 				JumpTime = MaxJumpTime;
+				jumpSound.Play ();
 			}
 
 			if (Input.GetButtonDown ("HeadCombine") && Input.GetButtonDown ("FootCombine")) {
@@ -122,8 +126,9 @@ public class Head : MonoBehaviour {
 				}
 			} 
 
-			if (Input.GetButtonDown("HeadSpecial") && Input.GetButtonDown("FootSpecial")) {
-				
+			//use ultimate
+			if (Input.GetButtonDown("HeadSpecial") && Input.GetButtonDown("FootSpecial") ) {
+				CastUltimate ();
 			}
 		}
 	}
@@ -151,6 +156,17 @@ public class Head : MonoBehaviour {
 		} else {
 			Clone.GetComponent<Rigidbody2D> ().AddForce(Vector2.right*1000);
 		}
+	}
+
+
+
+	void CastUltimate(){
+		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+		foreach (GameObject enemy in enemies) {
+			enemy.SendMessage ("Ultimate");
+		}
+		Debug.Log ("Ulti cast!");
+
 	}
 
 

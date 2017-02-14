@@ -12,10 +12,12 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	Rigidbody2D rb;
 	bool isGrounded;
+	GameObject soundPlayer;
 
 	void Start () {
+		GameObject.Find ("XPManager");
 		head = GameObject.Find ("Head");
-
+		soundPlayer = GameObject.Find ("EnemyDeathSoundHolder");
 		isGrounded = false;
 		//enemyCtrl = GameObject.Find ("EnemyManager");
 		rb = GetComponent<Rigidbody2D> ();
@@ -40,9 +42,9 @@ public class Enemy : MonoBehaviour {
 		if (coll.gameObject.tag == "Bullet") {
 			//GameObject.Find("EnemyManager").SendMessage("SpawnEnemy");
 			head.SendMessage ("ExpIncrease");
+			soundPlayer.SendMessage ("PlaySound");
 			Destroy (coll.gameObject);
 			Destroy (gameObject);
-			//Destroy (gameObject);
 		}
 
 		//Vivi's original code that kills enemy upon landing
@@ -61,6 +63,15 @@ public class Enemy : MonoBehaviour {
 		if (coll.gameObject.name == "Wall_Left" || coll.gameObject.name == "Wall_Right") {
 			speed *= -1f;
 			//Destroy (gameObject);
+		}
+	}
+
+	void Ultimate(){
+		if(GameObject.Find("Head").GetComponent<XPManager>().isLevel2){
+		soundPlayer.SendMessage ("PlaySound");
+		head.SendMessage ("ExpIncrease");
+		Destroy (gameObject);
+		Debug.Log ("Player used ult!");
 		}
 	}
 
