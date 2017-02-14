@@ -166,6 +166,7 @@ public class Head : MonoBehaviour {
 			enemy.SendMessage ("Ultimate");
 		}
 		Debug.Log ("Ulti cast!");
+		GameObject.Find ("UltiSoundHolder").SendMessage ("PlaySound");
 
 	}
 
