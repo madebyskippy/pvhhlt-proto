@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class Head : MonoBehaviour {
+
+	public UnityEvent OnCastUltimate = new UnityEvent();
+ 	GameObject ultiExplosion;
 	private Animator animator;
 	private Rigidbody2D rb;
 	private BoxCollider2D bc;
@@ -25,6 +30,9 @@ public class Head : MonoBehaviour {
 	GameObject enemy;
 
 	void Start () {
+		ultiExplosion = GameObject.Find ("UltiExplosion");
+ 		breakSoundHolder = GameObject.Find ("BreakSoundHolder");
+		breakSound = breakSoundHolder.GetComponent<AudioSource> ();
 		jumpSound = GetComponent<AudioSource> ();
 		bang = GameObject.Find ("BulletSoundHolder"); 
 		bangSound = bang.GetComponent<AudioSource> ();
@@ -60,6 +68,7 @@ public class Head : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+
 		if (!combined) {
 			if (Input.GetButton ("HeadLeft")) {
 				rb.velocity = new Vector2 (-1f * Speed, rb.velocity.y);
@@ -167,8 +176,8 @@ public class Head : MonoBehaviour {
 		}
 		Debug.Log ("Ulti cast!");
 		GameObject.Find ("UltiSoundHolder").SendMessage ("PlaySound");
-
-	}
+		OnCastUltimate.Invoke ();
+  	}
 
 
 }
